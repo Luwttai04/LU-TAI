@@ -1,4 +1,9 @@
--- 1. CHỐNG BỊ KÍCH (ANTI-IDLE)
+-- ==========================================
+-- SCRIPT: LỮ TÀI HUB - VIP EDITION
+-- TÍNH NĂNG: AUTO CHEST, ANTI-KICK, RESET 20S (CHỈ KHI BẬT)
+-- ==========================================
+
+-- 1. CHỨC NĂNG CHỐNG BỊ KÍCH (ANTI-IDLE)
 local VirtualUser = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:Connect(function()
     VirtualUser:CaptureController()
@@ -9,35 +14,29 @@ end)
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Win = Rayfield:CreateWindow({
     Name = "LỮ TÀI HUB - VIP",
-    LoadingTitle = "AuToChest By Lữ Tài!",
+    LoadingTitle = "Chào Lữ Tài! Đang tải...",
     ConfigurationSaving = {Enabled = false}
 })
 
 local Main = Win:CreateTab("Chính", 4483362458)
-
--- Biến kiểm soát
 _G.AutoChest = false
 
--- 3. TÍNH NĂNG TỰ ĐỘNG RESET (CHỈ CHẠY KHI BẬT AUTO CHEST)
+-- 3. TỰ ĐỘNG RESET MỖI 20 GIÂY (CHỈ CHẠY KHI BẬT NHẶT RƯƠNG)
 task.spawn(function()
     while true do
-        task.wait(1) -- Kiểm tra mỗi giây
-        if _G.AutoChest then
-            for i = 30, 1, -1 do -- Đếm ngược 30 giây
-                if not _G.AutoChest then break end
-                task.wait(1)
-                if i == 1 then
-                    pcall(function()
-                        local char = game.Players.LocalPlayer.Character
-                        if char then char:BreakJoints() end
-                    end)
+        task.wait(20)
+        if _G.AutoChest then -- Chỉ Reset nếu nút Nhặt Rương đang Bật
+            pcall(function()
+                local char = game.Players.LocalPlayer.Character
+                if char and char:FindFirstChild("HumanoidRootPart") then
+                    char:BreakJoints()
                 end
-            end
+            end)
         end
     end
 end)
 
--- 4. TÍNH NĂNG NHẶT RƯƠNG SIÊU NHANH
+-- 4. TÍNH NĂNG NHẶT RƯƠNG TỐC ĐỘ CAO
 Main:CreateToggle({
     Name = "Bật/Tắt Nhặt Rương (SIÊU NHANH)",
     CurrentValue = false,
@@ -62,7 +61,7 @@ Main:CreateToggle({
     end
 })
 
--- 5. NHẢY SERVER
+-- 5. TÍNH NĂNG NHẢY SERVER
 Main:CreateButton({
     Name = "Nhảy Server (Khi hết rương)",
     Callback = function()
@@ -78,8 +77,9 @@ Main:CreateButton({
     end
 })
 
+-- Thông báo chào Lữ Tài
 Rayfield:Notify({
     Title = "LỮ TÀI HUB",
-    Content = "Xin Chào, Script Đã Sẵn Sàng!",
+    Content = "Xin Chào, Script Đã Sẵn Sàng.",
     Duration = 5
 })
