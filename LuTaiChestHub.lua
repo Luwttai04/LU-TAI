@@ -17,7 +17,7 @@ local Win = Rayfield:CreateWindow({
     LoadingTitle = "Xin Chào! Menu Đang tải...",
     LoadingSubtitle = "Antiban Loading...", -- ĐÃ ĐỔI DÒNG CHỮ NHỎ Ở ĐÂY
     ConfigurationSaving = {Enabled = false}
-})
+}) -- CHỖ NÀY LÚC NÃY ÔNG THIẾU DẤU NÀY NÊN MENU KHÔNG CHẠY
 
 local Main = Win:CreateTab("Chính", 4483362458)
 _G.AutoChest = false
@@ -25,7 +25,7 @@ _G.AutoChest = false
 -- 3. TỰ ĐỘNG RESET MỖI 10 GIÂY (CHỈ CHẠY KHI BẬT NHẶT RƯƠNG)
 task.spawn(function()
     while true do
-        task.wait(12) -- ĐÃ ĐỔI THÀNH 10 GIÂY
+        task.wait(10) -- ĐÃ CHỈNH THÀNH 10 GIÂY
         if _G.AutoChest then 
             pcall(function()
                 local char = game.Players.LocalPlayer.Character
