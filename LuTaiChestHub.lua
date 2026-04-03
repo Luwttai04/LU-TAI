@@ -14,7 +14,7 @@ end)
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Win = Rayfield:CreateWindow({
     Name = "LỮ TÀI CHEST HUB - VIP",
-    LoadingTitle = "Chào Menu! Đang tải...",
+    LoadingTitle = "Xin Chào! Menu Đang tải...",
     LoadingSubtitle = "Antiban Loading...", -- ĐÃ ĐỔI DÒNG CHỮ NHỎ Ở ĐÂY
     ConfigurationSaving = {Enabled = false}
 })
