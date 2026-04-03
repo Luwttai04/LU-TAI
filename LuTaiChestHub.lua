@@ -21,10 +21,10 @@ local Win = Rayfield:CreateWindow({
 local Main = Win:CreateTab("Chính", 4483362458)
 _G.AutoChest = false
 
--- 3. TỰ ĐỘNG RESET MỖI 12 GIÂY (CHỈ CHẠY KHI BẬT NHẶT RƯƠNG)
+-- 3. TỰ ĐỘNG RESET MỖI 13 GIÂY (CHỈ CHẠY KHI BẬT NHẶT RƯƠNG)
 task.spawn(function()
     while true do
-        task.wait(12) -- ĐÃ CHỈNH THÀNH 12 GIÂY
+        task.wait(13) -- ĐÃ CHỈNH THÀNH 13 GIÂY
         if _G.AutoChest then 
             pcall(function()
                 local char = game.Players.LocalPlayer.Character
@@ -63,7 +63,7 @@ Main:CreateToggle({
 
 -- 5. TÍNH NĂNG NHẢY SERVER
 Main:CreateButton({
-    Name = "Nhảy Server (Khi hết rương)",
+    Name = "Hop Server (Khi hết rương)",
     Callback = function()
         local Http = game:GetService("HttpService")
         local Tp = game:GetService("TeleportService")
@@ -79,7 +79,7 @@ Main:CreateButton({
 
 -- THÔNG BÁO KHI LOAD XONG
 Rayfield:Notify({
-    Title = "LỮ TÀI HUB",
+    Title = "LỮ TÀI CHEST HUB",
     Content = "Xin Chào, Script Đã Sẵn Sàng.",
     Duration = 5
 })
