@@ -1,6 +1,6 @@
 -- ==========================================
--- SCRIPT: LỮ TÀI HUB - VIP EDITION
--- TÍNH NĂNG: AUTO CHEST, ANTI-KICK, RESET 20S (CHỈ KHI BẬT)
+-- SCRIPT: LỮ TÀI HUB - VIP EDITION (RAW GITHUB)
+-- TÍNH NĂNG: AUTO CHEST, ANTI-KICK, RESET 12S
 -- ==========================================
 
 -- 1. CHỨC NĂNG CHỐNG BỊ KÍCH (ANTI-IDLE)
@@ -13,23 +13,23 @@ end)
 -- 2. KHỞI TẠO MENU RAYFIELD
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Win = Rayfield:CreateWindow({
-    Name = "LỮ TÀI HUB - VIP",
-    LoadingTitle = "Chào Lữ Tài! Đang tải...",
+    Name = "LỮ TÀI CHEST HUB - VIP",
+    LoadingTitle = "Antiban Loading...", -- ĐÃ CẬP NHẬT
     ConfigurationSaving = {Enabled = false}
 })
 
 local Main = Win:CreateTab("Chính", 4483362458)
 _G.AutoChest = false
 
--- 3. TỰ ĐỘNG RESET MỖI 20 GIÂY (CHỈ CHẠY KHI BẬT NHẶT RƯƠNG)
+-- 3. TỰ ĐỘNG RESET MỖI 12 GIÂY (CHỈ CHẠY KHI BẬT NHẶT RƯƠNG)
 task.spawn(function()
     while true do
-        task.wait(20)
-        if _G.AutoChest then -- Chỉ Reset nếu nút Nhặt Rương đang Bật
+        task.wait(12) -- ĐÃ CHỈNH THÀNH 12 GIÂY
+        if _G.AutoChest then 
             pcall(function()
                 local char = game.Players.LocalPlayer.Character
                 if char and char:FindFirstChild("HumanoidRootPart") then
-                    char:BreakJoints()
+                    char:BreakJoints() -- Hồi sinh nhân vật
                 end
             end)
         end
@@ -77,7 +77,7 @@ Main:CreateButton({
     end
 })
 
--- Thông báo chào Lữ Tài
+-- THÔNG BÁO KHI LOAD XONG
 Rayfield:Notify({
     Title = "LỮ TÀI HUB",
     Content = "Xin Chào, Script Đã Sẵn Sàng.",
