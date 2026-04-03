@@ -1,6 +1,6 @@
 -- ==========================================
--- SCRIPT: LỮ TÀI HUB - VIP EDITION (RAW GITHUB)
--- TÍNH NĂNG: AUTO CHEST, ANTI-KICK, RESET 12S
+-- SCRIPT: LỮ TÀI HUB - VIP EDITION
+-- TÍNH NĂNG: AUTO CHEST, ANTI-KICK, RESET 10S
 -- ==========================================
 
 -- 1. CHỨC NĂNG CHỐNG BỊ KÍCH (ANTI-IDLE)
@@ -14,22 +14,23 @@ end)
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Win = Rayfield:CreateWindow({
     Name = "LỮ TÀI CHEST HUB - VIP",
-    LoadingTitle = "Antiban Loading...", -- ĐÃ CẬP NHẬT
+    LoadingTitle = "Chào Menu! Đang tải...",
+    LoadingSubtitle = "Antiban Loading...", -- ĐÃ ĐỔI DÒNG CHỮ NHỎ Ở ĐÂY
     ConfigurationSaving = {Enabled = false}
 })
 
 local Main = Win:CreateTab("Chính", 4483362458)
 _G.AutoChest = false
 
--- 3. TỰ ĐỘNG RESET MỖI 13 GIÂY (CHỈ CHẠY KHI BẬT NHẶT RƯƠNG)
+-- 3. TỰ ĐỘNG RESET MỖI 10 GIÂY (CHỈ CHẠY KHI BẬT NHẶT RƯƠNG)
 task.spawn(function()
     while true do
-        task.wait(13) -- ĐÃ CHỈNH THÀNH 13 GIÂY
+        task.wait(10) -- ĐÃ ĐỔI THÀNH 10 GIÂY
         if _G.AutoChest then 
             pcall(function()
                 local char = game.Players.LocalPlayer.Character
                 if char and char:FindFirstChild("HumanoidRootPart") then
-                    char:BreakJoints() -- Hồi sinh nhân vật
+                    char:BreakJoints()
                 end
             end)
         end
