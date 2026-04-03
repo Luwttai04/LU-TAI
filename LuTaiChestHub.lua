@@ -61,19 +61,49 @@ Main:CreateToggle({
     end
 })
 
--- 5. TÍNH NĂNG NHẢY SERVER
+-- 5. TÍNH NĂNG NHẢY SERVER (BẢN FIX LỖI "KHÔNG TÌM THẤY SERVER")
 Main:CreateButton({
-    Name = "Hop Server (Khi hết rương)",
+    Name = "Hop Server (Ngẫu Nhiên)",
     Callback = function()
         local Http = game:GetService("HttpService")
         local Tp = game:GetService("TeleportService")
-        local S = Http:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100"))
-        for _,s in pairs(S.data) do
-            if s.playing < s.maxPlayers and s.id ~= game.JobId then
-                Tp:TeleportToPlaceInstance(game.PlaceId, s.id)
-                break
+        local PlaceId = game.PlaceId
+        
+        Rayfield:Notify({Title = "Lữ Tài Hub", Content = "Đang quét server mới...", Duration = 2})
+
+        local function NhayServer()
+            local Success, Error = pcall(function()
+                -- Lấy danh sách server ngẫu nhiên để không bị trùng cái cũ
+                local Url = "https://games.roblox.com/v1/games/"..PlaceId.."/servers/Public?limit=100&cursor="
+                local Raw = game:HttpGet(Url)
+                local Servers = Http:JSONDecode(Raw)
+                
+                if Servers and Servers.data then
+                    local ServerList = {}
+                    for _, s in pairs(Servers.data) do
+                        if s.id ~= game.JobId and tonumber(s.playing) < tonumber(s.maxPlayers) then
+                            table.insert(ServerList, s.id)
+                        end
+                    end
+                    
+                    if #ServerList > 0 then
+                        local RandomServer = ServerList[math.random(1, #ServerList)]
+                        Tp:TeleportToPlaceInstance(PlaceId, RandomServer)
+                    else
+                        -- Nếu không tìm thấy trong 100 cái đầu, thử nhảy cầu may bằng hệ thống
+                        Tp:Teleport(PlaceId)
+                    end
+                end
+            end)
+            
+            if not Success then
+                Rayfield:Notify({Title = "Lỗi", Content = "Đang thử lại...", Duration = 2})
+                task.wait(1)
+                NhayServer()
             end
         end
+        
+        NhayServer()
     end
 })
 
