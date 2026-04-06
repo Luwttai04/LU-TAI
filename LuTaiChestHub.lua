@@ -50,12 +50,12 @@ Main:CreateToggle({
                         for _,v in pairs(game:GetDescendants()) do
                             if v:IsA("TouchTransmitter") and v.Parent and v.Parent.Name:find("Chest") then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
-                                task.wait(0.1)
+                                task.wait(0.2)
                                 if not _G.AutoChest then break end
                             end
                         end
                     end)
-                    task.wait(0.05)
+                    task.wait(0.1)
                 end
             end)
         end
